@@ -59,9 +59,7 @@ export default class App extends React.Component {
                   backgroundColor="transparent"
                   translucent
                 /> */}
-                {Platform.OS === 'android' && Platform.Version >= 20 ? (
-                  <StatusBarAndroid />
-                ) : null}
+                {Platform.OS === 'android' && Platform.Version >= 20 ? <StatusBarAndroid /> : null}
                 {/* <Navigator /> */}
               </View>
               {/* </NetworkInterceptor> */}

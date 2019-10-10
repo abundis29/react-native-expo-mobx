@@ -27,7 +27,6 @@ class AuthService extends ApiService {
     super();
     this.init();
     console.info(config);
-
   }
 
   init = async () => {

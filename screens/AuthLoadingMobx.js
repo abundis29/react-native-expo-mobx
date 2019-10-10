@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { Button } from 'react-native';
 import styled from 'styled-components/native';
-import Store from '../mobx/observableStore'
+import Store from '../mobx/observableStore';
 import { observer, inject } from 'mobx-react';
 
 const ContainerView = styled.View`
   flex: 1;
-  justifyContent: center;
-  alignItems: center;
-  backgroundColor: ${props => props.theme.facebook}
+  justifycontent: center;
+  alignitems: center;
+  backgroundcolor: ${props => props.theme.facebook};
 `;
 
 const TitleText = styled.Text`
-  fontSize: 30;
+  fontsize: 30;
   color: ${props => props.theme.facebook};
 `;
 
@@ -23,8 +23,16 @@ class TrainStationsScreen extends Component {
     return (
       <ContainerView>
         <TitleText>{this.props.navigation.state.routeName}</TitleText>
-        <TitleText>DemostrationVariable: {ApplicationState.AppGlobalState.DemostrationVariable.toString()}</TitleText>
-        <Button title={"Toggle Demo Variable"} onPress={()=>{ ApplicationState.AppGlobalState.DemostrationVariable = !ApplicationState.AppGlobalState.DemostrationVariable }}/>
+        <TitleText>
+          DemostrationVariable: {ApplicationState.AppGlobalState.DemostrationVariable.toString()}
+        </TitleText>
+        <Button
+          title={'Toggle Demo Variable'}
+          onPress={() => {
+            ApplicationState.AppGlobalState.DemostrationVariable = !ApplicationState.AppGlobalState
+              .DemostrationVariable;
+          }}
+        />
       </ContainerView>
     );
   }
