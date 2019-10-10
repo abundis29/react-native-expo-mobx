@@ -6,10 +6,15 @@ import * as Font from 'expo-font';
 import * as Icon from '@expo/vector-icons';
 import Sentry from 'sentry-expo';
 import PropTypes from 'prop-types';
-import { Provider } from 'react-redux';
-import { InAppNotificationProvider } from 'react-native-in-app-notification';
+import { ThemeProvider } from 'styled-components';
 
-import store from './store';
+import { Provider as MobXProvider, observer } from 'mobx-react';
+import { InAppNotificationProvider } from 'react-native-in-app-notification';
+import { Colors } from './themes';
+
+// import store from './store';
+import Store from './mobx/observableStore';
+
 import NavigationService from './services/NavigationService';
 import AppNavigator from './navigation/AppNavigator';
 import NetworkInterceptor from './screens/NetworkInterceptor';
@@ -21,6 +26,7 @@ if (!__DEV__) {
 
 YellowBox.ignoreWarnings(['react-native-i18n module is not correctly linked']);
 
+@observer
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false
@@ -41,20 +47,27 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <Provider store={store}>
-          <InAppNotificationProvider height={150}>
-            <NetworkInterceptor>
+        <ThemeProvider theme={Colors}>
+          <MobXProvider store={Store}>
+            <InAppNotificationProvider height={150}>
+              {/* <NetworkInterceptor> */}
               <View style={styles.container}>
                 {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-                <AppNavigator
-                  ref={navigatorRef => {
-                    NavigationService.setTopLevelNavigator(navigatorRef);
-                  }}
-                />
+
+                {/* <StatusBar
+                  barStyle="light-content"
+                  backgroundColor="transparent"
+                  translucent
+                /> */}
+                {Platform.OS === 'android' && Platform.Version >= 20 ? (
+                  <StatusBarAndroid />
+                ) : null}
+                {/* <Navigator /> */}
               </View>
-            </NetworkInterceptor>
-          </InAppNotificationProvider>
-        </Provider>
+              {/* </NetworkInterceptor> */}
+            </InAppNotificationProvider>
+          </MobXProvider>
+        </ThemeProvider>
       );
     }
   }

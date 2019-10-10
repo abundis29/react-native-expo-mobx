@@ -3,6 +3,7 @@ import { AsyncStorage } from 'react-native';
 import Sentry from 'sentry-expo';
 import config from '../config';
 
+
 class HttpService {
   constructor(options = {}) {
     this.client = axios.create(options);

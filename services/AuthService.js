@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { AsyncStorage, Platform } from 'react-native';
 import * as Google from 'expo-google-app-auth';
 import * as Facebook from 'expo-facebook';
@@ -25,6 +26,8 @@ class AuthService extends ApiService {
   constructor() {
     super();
     this.init();
+    console.info(config);
+
   }
 
   init = async () => {
