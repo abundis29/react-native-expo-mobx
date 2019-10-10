@@ -1,4 +1,4 @@
-# **Expo boilerplate REDUX **
+# **Expo boilerplate MOBX **
 
 Expo SDK version: **35.0.0**
 
